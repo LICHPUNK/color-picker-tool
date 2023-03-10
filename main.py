@@ -1,6 +1,8 @@
 import pyautogui
 import tkinter as tk
 from pynput import mouse
+import tkinter.messagebox as messagebox
+import tkinter.simpledialog as simpledialog
 
 
 class ColorPicker:
@@ -32,8 +34,12 @@ class ColorPicker:
         if pressed:
             # Retrieve color data at mouse position with Pyautogui
             color = pyautogui.pixel(x, y)
-            # Pass the color data to show color method
+            # Pass the color data to show_color() method
             self.show_color(color)
+            # Convert color data (RGB) to hexadecimal format to be copied
+            hex_color = "#{:02x}{:02x}{:02x}".format(color[0], color[1], color[2])
+            # Pass hexadecimal color data to copy_to_clipboard() method
+            self.copy_to_clipboard(hex_color)
 
     # Color Update Method
     def show_color(self, color):
@@ -43,6 +49,12 @@ class ColorPicker:
         self.color_canvas.configure(bg=hex_color)
         # Update GUI Color Label
         self.color_label.configure(text=hex_color)
+
+    def copy_to_clipboard(self, value):
+        # Clear existing clipboard
+        self.master.clipboard_clear()
+        # Append new color data to clipboard
+        self.master.clipboard_append(value)
 
 
 # Main
