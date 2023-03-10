@@ -28,7 +28,7 @@ class ColorPicker:
 
     # Click Method
     def on_click(self, x, y, button, pressed):
-        # If left click is true...
+        # If click is true...
         if pressed:
             # Retrieve color data at mouse position with Pyautogui
             color = pyautogui.pixel(x, y)
